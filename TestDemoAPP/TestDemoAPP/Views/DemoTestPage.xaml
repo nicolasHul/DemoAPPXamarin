@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TestDemoAPP.Views.DemoTestPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TestDemoAPP"
+    xmlns:vm="clr-namespace:TestDemoAPP.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:DemoTestViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+
+        <Grid>
+
+            <CarouselView
+                x:Name="carousel"
+                HorizontalScrollBarVisibility="Never"
+                IndicatorView="indicatorView"
+                IsScrollAnimated="False"
+                ItemsSource="{Binding ActivityData}"
+                Position="{Binding Position, Mode=TwoWay}"
+                VerticalOptions="FillAndExpand">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource CarouselWorkaround}">
+                            <local:DemoTestTemplate Command="{Binding TestCommand}" CommandParameter="{Binding .}" />
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+
+            </CarouselView>
+
+            <IndicatorView
+                x:Name="indicatorView"
+                Padding="0,0,0,30"
+                IndicatorColor="{DynamicResource TranslucidBlack}"
+                SelectedIndicatorColor="{DynamicResource BaseTextColor}"
+                VerticalOptions="Start" />
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
